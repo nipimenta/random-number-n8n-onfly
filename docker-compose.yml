@@ -1,19 +1,13 @@
-version: '3.8'
-
 volumes:
   db_storage:
   n8n_storage:
 
 services:
   postgres:
-    image: postgres:16
-    restart: always
-    environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
-      - POSTGRES_NON_ROOT_USER
-      - POSTGRES_NON_ROOT_PASSWORD
+    image: postgres:17
+    restart: unless-stopped
+    env_file:
+      - ./.env
     volumes:
       - db_storage:/var/lib/postgresql/data
       - ./init-data.sh:/docker-entrypoint-initdb.d/init-data.sh
@@ -24,7 +18,7 @@ services:
       retries: 10
 
   n8n:
-    image: docker.n8n.io/n8nio/n8n
+    build: .
     restart: always
     environment:
       - DB_TYPE=postgresdb
