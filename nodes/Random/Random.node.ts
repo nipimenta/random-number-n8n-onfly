@@ -28,7 +28,7 @@ export class Random implements INodeType {
 				type: 'options',
 				options: [
 					{
-						name: 'Gerador de Número Aleatório',
+						name: 'True Random Number Generator',
 						value: 'generate',
 						description: 'Gera um número aleatório',
 						action: 'Gera um número',
