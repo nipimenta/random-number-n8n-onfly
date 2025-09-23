@@ -9,4 +9,4 @@ RUN npm ci
 COPY gulpfile.js tsconfig.json ./
 COPY nodes ./nodes
 
-CMD [ "./build.sh" ]
+CMD [ "sh", "./build.sh" ]

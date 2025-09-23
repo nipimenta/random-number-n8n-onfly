@@ -6,9 +6,9 @@ import {
 } from 'n8n-workflow';
 import { NodeOperationError } from 'n8n-workflow';
 
-export class RandomAAAA implements INodeType {
+export class Random implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Gerador de Números Aleatórios',
+		displayName: 'Random',
 		name: 'Random',
 		group: ['transform'],
 		version: 1,
@@ -73,8 +73,18 @@ export class RandomAAAA implements INodeType {
 					throw new Error('Valor Mínimo deve ser menor que o valor Máximo');
 				}
 
+				const queryString = {
+					num: 1,
+					min: valorMinimo,
+					max: valorMaximo,
+					col: 1,
+					base: 10,
+					format: "plain",
+					rnd: "new"
+				}
 				item.json.result = await this.helpers.httpRequest({
-					url: `https://www.random.org/integers/?num=1&min=${valorMinimo}&max=${valorMaximo}&col=1&base=10&format=plain&rnd=new`,
+					url: "https://www.random.org/integers/",
+					qs: queryString,
 				});
 			} catch (error) {
 				if (this.continueOnFail()) {

@@ -22,8 +22,7 @@ services:
     build: .
     restart: on-failure:5
     volumes:
-      - n8n_custom:/build/dist
-    command: "sh /build/build.sh"
+      - n8n_custom:/build/output
 
   n8n:
     image: docker.n8n.io/n8nio/n8n
