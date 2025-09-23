@@ -1,5 +1,5 @@
 {
-    "node": "n8n-nodes-base.RandomNumber",
+    "node": "n8n-nodes-base.random",
     "nodeVersion": "1.0",
     "codexVersion": "1.0",
     "categories": [

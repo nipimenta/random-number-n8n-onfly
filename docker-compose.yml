@@ -1,6 +1,7 @@
 volumes:
   db_storage:
   n8n_storage:
+  n8n_custom:
 
 services:
   postgres:
@@ -17,9 +18,16 @@ services:
       timeout: 5s
       retries: 10
 
-  n8n:
+  builder:
     build: .
-    restart: always
+    restart: on-failure:5
+    volumes:
+      - n8n_custom:/build/dist
+    command: "sh /build/build.sh"
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    restart: unless-stopped
     environment:
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_HOST=postgres
@@ -33,6 +41,9 @@ services:
       - postgres
     volumes:
       - n8n_storage:/home/node/.n8n
+      - n8n_custom:/home/node/.n8n/custom
     depends_on:
+      builder:
+        condition: service_completed_successfully
       postgres:
         condition: service_healthy

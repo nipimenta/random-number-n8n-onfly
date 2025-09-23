@@ -3,11 +3,10 @@ import {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
-	NodeConnectionTypes,
 } from 'n8n-workflow';
 import { NodeOperationError } from 'n8n-workflow';
 
-export class RandomNumber implements INodeType {
+export class RandomAAAA implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Gerador de Números Aleatórios',
 		name: 'Random',
@@ -19,10 +18,25 @@ export class RandomNumber implements INodeType {
 		defaults: {
 			name: 'Random',
 		},
-		inputs: [NodeConnectionTypes.Main],
-		outputs: [NodeConnectionTypes.Main],
+		inputs: ['main'],
+		outputs: ['main'],
 		usableAsTool: true,
 		properties: [
+			{
+				displayName: 'Operação',
+				name: 'operation',
+				type: 'options',
+				options: [
+					{
+						name: 'Gerador de Número Aleatório',
+						value: 'generate',
+						description: 'Gera um número aleatório',
+						action: 'Gera um número',
+					},
+				],
+				default: 'generate',
+				noDataExpression: true,
+			},
 			{
 				displayName: 'Mínimo',
 				name: 'Min',
@@ -45,16 +59,18 @@ export class RandomNumber implements INodeType {
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
 
-		let item: INodeExecutionData;
 
 		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
+			const operation = this.getNodeParameter('operation', itemIndex) as string;
+			if (operation !== 'generate') continue;
+
 			try {
 				const valorMinimo = this.getNodeParameter('Min', itemIndex, 0) as number;
 				const valorMaximo = this.getNodeParameter('Max', itemIndex, 100) as number;
-				item = items[itemIndex];
+				const item = items[itemIndex];
 
-				if(valorMinimo>=valorMaximo){
-					throw new Error("Valor Mínimo deve ser maior que o valor Máximo")
+				if (valorMinimo >= valorMaximo) {
+					throw new Error('Valor Mínimo deve ser menor que o valor Máximo');
 				}
 
 				item.json.result = await this.helpers.httpRequest({
