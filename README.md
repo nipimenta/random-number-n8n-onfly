@@ -27,10 +27,28 @@ Banco de Dados: PostgreSQL
 - Instalação e Execução 
 Siga o passos para realizar o teste da aplicação
 
-1. Clone o Repositório
+1. Instalar o docker
+    Garanta que o Docker Desktop esteja instalado e em execução na sua máquina. Ele é necessário para criar os containers da aplicação.
+    Links de Instalação:
+    Windows https://docs.docker.com/desktop/setup/install/windows-install/
+    Mac https://docs.docker.com/desktop/setup/install/mac-install/
 
+2. Clone o Repositório
+    Com o docker instalado, clone o projeto e acesse a pasta criada.
 
-2. Suba a Infraestrutura com Docker Compose 
+    git clone https://github.com/nipimenta/random-number-n8n-onfly
+    cd seu-repositorio-n8n
+
+3. Suba a Infraestrutura com Docker Compose 
+Utilize o comando a baixo para criar o nó customizado e inicializar o containers
 docker-compose up -d --build
+
+4. Acessar aplicação
+ A aplicação agora está disponível no localhost na porta 5678
+localhost:5678
+
+5. Após acessar a aplicação, selecione um novo fluxo de trabalho. Em seguida, utilize a barra de pesquisa para buscar por "random" e selecione a opção que exibe a imagem de um dado.
+
+
 
 
