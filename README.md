@@ -3,6 +3,7 @@ N8N - RANDOM NUMBERS - DESAFIO ONFLY
 - Descrição
 Repositório com o desafio da Onfly para criação de um nó personalizado na plataforma de automação de workflows n8n, utilizando a API do Random.org para gerar números inteiros aleatórios. No desenvolvimento, utilizei containers com Docker Compose e um banco de dados PostgreSQL para persistência dos dados.
 
+-------------------------------------------------------------------------------------------------------------
 
 - Features do Nó
 
@@ -11,10 +12,11 @@ Operação: True Random Number Generator
 
 Parâmetros de Entrada:
 Min: O valor mínimo do intervalo (inclusivo).
-Max: O valor máximo do intervalo (inclusivo).
+Max: O valor máximo do intervalo.
 
 Saída: Retorna um único número inteiro aleatório dentro do intervalo definido pelo usuário, utilizando a API do Random.org.
 
+-------------------------------------------------------------------------------------------------------------
 
 - Tecnologias:
 
@@ -23,6 +25,7 @@ Linguagem do Nó: Node.js v22, TypeScript
 Containerização: Docker, Docker Compose
 Banco de Dados: PostgreSQL
 
+-------------------------------------------------------------------------------------------------------------
 
 - Instalação e Execução 
 Siga o passos para realizar o teste da aplicação
@@ -49,6 +52,39 @@ localhost:5678
 
 5. Após acessar a aplicação, selecione um novo fluxo de trabalho. Em seguida, utilize a barra de pesquisa para buscar por "random" e selecione a opção que exibe a imagem de um dado.
 
+-------------------------------------------------------------------------------------------------------------
 
+- Testes
+
+- Teste 1: Funcionamento Básico (Sucesso)
+Validar a operação normal do nó.
+
+Adicione o nó Random ao workflow.
+
+Defina Min como 1 e Max como 10.
+
+Execute o nó.
+Resultado Esperado: Um número inteiro entre 1 e 10.
+
+-------------------------------------------------------------------------------------------------------------
+- Teste 2: Caso de Borda (Valores Iguais)
+Validar o comportamento com um intervalo de apenas um número.
+
+No mesmo nó, defina Min como 10 e Max como 10.
+
+Execute o nó.
+
+Resultado Esperado: Valor Mínimo deve ser menor que o valor Máximo
+
+-------------------------------------------------------------------------------------------------------------
+
+- Teste 3: Caso de Erro (Intervalo Inválido)
+Validar o tratamento de erro.
+
+No mesmo nó, defina Min como 50 e Max como 5.
+
+Execute o nó.
+
+Resultado Esperado: Valor Mínimo deve ser menor que o valor Máximo
 
 
